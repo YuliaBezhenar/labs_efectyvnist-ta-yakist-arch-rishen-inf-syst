@@ -1,15 +1,21 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import context.DeliveryContext;
+import strategies.*;
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        DeliveryContext context = new DeliveryContext();
+        double distance = 10;  //in kilometers
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        System.out.println("---Client choose Pickup---");
+        context.setStrategy(new Pickup());
+        System.out.println("Cost: " + context.calc(distance));
+
+        System.out.println("\n---Client choose External Delivery---");
+        context.setStrategy(new ExternalDelivery());
+        System.out.println("Cost: " + context.calc(distance));
+
+        System.out.println("\n---Client choose Internal Delivery---");
+        context.setStrategy(new InternalDelivery());
+        System.out.println("Cost: " + context.calc(distance));
     }
 }
